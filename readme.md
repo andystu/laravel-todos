@@ -1,4 +1,43 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Install php composer
+```
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
+mv composer.phar /usr/local/bin/composer
+```
+```
+composer create-project --prefer-dist laravel/laravel todos-app "5.8.*"   
+
+php artisan make:controller 
+
+.env => mysql configuration
+php artisan make:model Todo
+php artisan make:migration create_todos_table  
+
+php artisan migrate 
+php artisan migrate:rollback
+php artisan migrate:refresh 
+
+php artisan make:factory TodoFactory
+php artisan make:seed TodosSeeder
+php artisan db:seed 
+```
+# docker-compose.yml
+```
+version: '3.1'
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todos_app
+    ports:
+      - "3306:3306"
+```
+`mysql -u root -h 127.0.0.1 -p`
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
